@@ -39,6 +39,12 @@ setDoc(doc(citiesRef), {
     regions: ["west_coast", "socal"]
 });
 
+setDoc(doc(citiesRef), {
+    name: "Washington, D.C.", state: null, country: "USA",
+    capital: true, population: 680000,
+    regions: ["east_coast"]
+});
+
 // citiesRef.doc("LA").set({
 //     name: "Los Angeles", state: "CA", country: "USA",
 //     capital: false, population: 3900000,
