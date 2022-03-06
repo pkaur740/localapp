@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import { initializeApp } from 'firebase/app';
-import { getFirestore, collection, getDocs, doc } from 'firebase/firestore/lite';
+import { getFirestore, collection, getDocs, doc, addDoc, setDoc } from 'firebase/firestore/lite';
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -19,32 +19,42 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-console.log(db);
+const db = getFirestore();
+console.log('db', db);
 
 
 var citiesRef = collection(db,"cities");
-console.log(citiesRef);
-citiesRef.doc("SF").set({
-    name: "San Francisco", state: "CA", country: "USA",
-    capital: false, population: 860000,
-    regions: ["west_coast", "norcal"] });
-citiesRef.doc("LA").set({
+console.log('here', citiesRef);
+setDoc(doc(citiesRef), {
+    name: "San Francisco", 
+    state: "CA", 
+    country: "USA",
+    capital: false, 
+    population: 860000,
+    regions: ["west_coast", "norcal"]
+});
+setDoc(doc(citiesRef), {
     name: "Los Angeles", state: "CA", country: "USA",
     capital: false, population: 3900000,
-    regions: ["west_coast", "socal"] });
-citiesRef.doc("DC").set({
-    name: "Washington, D.C.", state: null, country: "USA",
-    capital: true, population: 680000,
-    regions: ["east_coast"] });
-citiesRef.doc("TOK").set({
-    name: "Tokyo", state: null, country: "Japan",
-    capital: true, population: 9000000,
-    regions: ["kanto", "honshu"] });
-citiesRef.doc("BJ").set({
-    name: "Beijing", state: null, country: "China",
-    capital: true, population: 21500000,
-    regions: ["jingjinji", "hebei"] });
+    regions: ["west_coast", "socal"]
+});
+
+// citiesRef.doc("LA").set({
+//     name: "Los Angeles", state: "CA", country: "USA",
+//     capital: false, population: 3900000,
+//     regions: ["west_coast", "socal"] });
+// citiesRef.doc("DC").set({
+//     name: "Washington, D.C.", state: null, country: "USA",
+//     capital: true, population: 680000,
+//     regions: ["east_coast"] });
+// citiesRef.doc("TOK").set({
+//     name: "Tokyo", state: null, country: "Japan",
+//     capital: true, population: 9000000,
+//     regions: ["kanto", "honshu"] });
+// citiesRef.doc("BJ").set({
+//     name: "Beijing", state: null, country: "China",
+//     capital: true, population: 21500000,
+//     regions: ["jingjinji", "hebei"] });
 
 // Get a list of cities from your database
 /*
